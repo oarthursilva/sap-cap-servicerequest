@@ -11,20 +11,21 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-@ServiceName("AdminService")
+@Deprecated
+//@Component
+//@ServiceName("AdminService")
 public class AdminService implements EventHandler {
 
     private final Map<Object, Map<String, Object>> services = new HashMap<>();
 
-    @On(event = CqnService.EVENT_CREATE, entity = "AdminService.Service")
+    //    @On(event = CqnService.EVENT_CREATE, entity = "AdminService.Service")
     public void handleCreate(CdsCreateEventContext context) {
         context.getCqn().entries().forEach(service -> {
             services.put(service.get("UUID"), service);
         });
     }
 
-    @On(event = CqnService.EVENT_READ, entity = "AdminService.Service")
+    //    @On(event = CqnService.EVENT_READ, entity = "AdminService.Service")
     public void handleRead(CdsReadEventContext context) {
         context.setResult(services.values());
     }
